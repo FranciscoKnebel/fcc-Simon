@@ -1,4 +1,4 @@
-body {
+html, body {
   background-image: url(http://cdn.backgroundhost.com/backgrounds/subtlepatterns/wood_pattern.png);
 
   -webkit-user-select: none;
@@ -8,13 +8,20 @@ body {
   user-select: none;
 }
 
+h3 {
+  font-family: Port Lligat Slab, sans-serif;
+  margin: 0;
+  font-size: 3em;
+
+}
+
 .option {
   display: inline-block;
   position: relative;
   height: 11.5em;
   width: 11.5em;
   border: 1em;
-  border-style: inset;
+  border-style: solid;
   border-color: rgb(51, 51, 51);
   border-color: rgba(51, 51, 51, 0.2);
 }
@@ -37,11 +44,23 @@ body {
 }
 
 .console {
+  width: 13em;
+  height: 11em;
 
+  position: absolute;
+  border-radius: 100%;
+  top: 27.5%;
+  left: 24%;
+  background-color: rgb(236, 231, 238);
+  border: 1em;
+  border-style: solid;;
+  border-color: #333;
 }
 
-
-
+.console-inner {
+  position: relative;
+  top: 10%;
+}
 
 .green {
   border-top-left-radius: 100%;
