@@ -12,7 +12,10 @@ h3 {
   font-family: Port Lligat Slab, sans-serif;
   margin: 0;
   font-size: 3em;
+}
 
+p {
+  font-family: Roboto, sans-serif;
 }
 
 .option {
@@ -45,11 +48,11 @@ h3 {
 
 .console {
   width: 13em;
-  height: 11em;
+  height: 12em;
 
   position: absolute;
-  border-radius: 100%;
-  top: 27.5%;
+  border-radius: 25%;
+  top: 26.5%;
   left: 24%;
   background-color: rgb(236, 231, 238);
   border: 1em;
@@ -65,9 +68,10 @@ h3 {
 .green {
   border-top-left-radius: 100%;
   background-color: #00CC33;
+  transition: 0.5s;
 }
 
-.green:active {
+.green-active {
   background-color: #00A329;
   transition: 0.5s;
 }
@@ -75,9 +79,10 @@ h3 {
 .red {
   border-top-right-radius: 100%;
   background-color: #CC0000;
+  transition: 0.5s;
 }
 
-.red:active {
+.red-active {
   background-color: #A30000;
   transition: 0.5s;
 }
@@ -85,9 +90,10 @@ h3 {
 .blue {
   border-bottom-right-radius: 100%;
   background-color: #0033FF;
+  transition: 0.5s;
 }
 
-.blue:active {
+.blue-active {
   background-color: #0029CC;
   transition: 0.5s;
 }
@@ -95,9 +101,10 @@ h3 {
 .yellow {
   border-bottom-left-radius: 100%;
   background-color: #FFFF00;
+  transition: 0.5s;
 }
 
-.yellow:active {
+.yellow-active {
   background-color: #CCCC00;
   transition: 0.5s;
 }
