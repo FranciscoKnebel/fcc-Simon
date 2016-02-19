@@ -11,11 +11,17 @@ html, body {
 h3 {
   font-family: Port Lligat Slab, sans-serif;
   margin: 0;
-  font-size: 3em;
+  font-size: 2.5em;
+}
+
+h4 {
+  font-family: Port Lligat Slab, sans-serif;
+  margin: 0;
 }
 
 p {
   font-family: Roboto, sans-serif;
+  margin: 0;
 }
 
 .option {
@@ -37,7 +43,7 @@ p {
   text-align: center;
   margin: auto;
   background-color: #333;
-  top: 15vh;
+  top: 5vh;
   box-shadow: 0 0 20px #333;
 }
 
@@ -61,8 +67,21 @@ p {
 }
 
 .console-inner {
-  position: relative;
-  top: 10%;
+  line-height: 2;
+}
+
+.counter {
+  font-family: monospace;
+  color: #DC0D29;
+  background-color: #32050C;
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border: 1px solid #32050C;
+}
+
+.btn-xs {
+  border-radius: 0;
 }
 
 .green {

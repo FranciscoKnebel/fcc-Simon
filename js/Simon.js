@@ -1,40 +1,63 @@
-var canPlay = true;
+var canPlay = false;
+var notStarted = true;
 var currentMove = 0;
 var Moves = [];
 
 var app = angular.module('simon', []);
 app.controller('game', function($scope, $timeout, $interval) {
   $scope.total = 0;
+  $scope.Replaying = false;
 
   $scope.optionClick = function(event) {
     var color = event.target.classList[1];
 
-    if(canPlay === true) {
-      clickButton(color);
-      Moves.push(color);
+    if(canPlay === true) { //need to add iterations for multiple buttons
+      if(Moves[currentMove] === color) { //correct choice
+        clickButton(color);
+        currentMove++;
+      }
+      else { // wrong choice
+        clickButton('wrong');
+        $scope.ReplayAll();
+      }
     }
-    $scope.total = Moves.length;
+  }
+
+  $scope.Start = function() {
+    if(notStarted === true) {
+      notStarted = false;
+      Moves.push(nextButton());
+      $scope.total = Moves.length;
+      canPlay = true;
+      $scope.ReplayAll();
+    }
   }
 
   $scope.ReplayAll = function() {
-    var index = 0;
-    var promise = $interval(function() {
-      if(index > Moves.length - 1) {
-        $interval.cancel(promise);
-      }
-      else {
-        clickButton(Moves[index++]);
-      }
+    if(canPlay === true) {
+      var index = 0;
+      canPlay = false;
+      $scope.Replaying = true;
+      var promise = $interval(function() {
+        if(index > Moves.length - 1) {
+          $interval.cancel(promise);
+          canPlay = true;
+          $scope.Replaying = false;
+        }
+        else {
+          clickButton(Moves[index++]);
+        }
 
-    }, 1000);
+      }, 1000);
+    }
   }
 
   $scope.Clear = function() {
     currentMove = 0;
     Moves = [];
     $scope.total = 0;
+    notStarted = true;
   }
-
 
   function clickButton(color) {
     $('.' + color).addClass(color + '-active')
@@ -69,8 +92,6 @@ app.controller('game', function($scope, $timeout, $interval) {
 
     return value;
   }
-
-
 
   function playMusic(color) {
     switch (color) {

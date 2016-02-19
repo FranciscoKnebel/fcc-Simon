@@ -8,11 +8,11 @@
 
     <link rel='stylesheet prefetch' type='text/css' href='css/bootstrap.min.css'>
     <link rel='stylesheet' type='text/css' href='css/font-awesome.min.css'>
-    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Kreon|Port+Lligat+Slab|Roboto'>
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Kreon|Port+Lligat+Slab|Roboto|Alfa Slab One'>
     <link rel="stylesheet" href="css/Simon.css">
   </head>
   <body ng-app="simon" ng-controller="game">
-    <div class="well" align="center" style="background-color: rgba(255,255,255,0.5);">
+    <div class="container well" align="center" style="background-color: rgba(255,255,255,0.9);">
       <p>
         Total buttons pressed: {{total}}
       </p>
@@ -35,10 +35,22 @@
 
       <div class="console">
         <div class="console-inner">
-          <h3>Simon</h3>
-          <p class="btn btn-default btn-sm" ng-click="ReplayAll()">Replay all</p>
-          <p class="btn btn-danger btn-xs" ng-click="Clear()">Clear</p>
+          <div class="container-fluid">
+            <h3 style="font-family: Alfa Slab One;">Simon<span class="small">®</span></h3>
+            <div class="row">
+              <p class="col-xs-4 btn btn-info btn-xs" ng-click="Start()">Start</p>
+              <p class="col-xs-4 counter">{{total}}</p>
+              <p class="col-xs-4 btn btn-danger btn-xs" ng-click="Clear()">Clear</p>
+              <p class="col-xs-12 btn btn-default btn-xs" ng-click="ReplayAll()">Replay</p>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top: 40px;">
+      <div class="container alert alert-info fade in" align="center" ng-show="Replaying" >
+        <h4><strong>Standby.</strong> Currently replaying!</h4>
       </div>
     </div>
 
