@@ -7,18 +7,63 @@ var app = angular.module('simon', []);
 app.controller('game', function($scope, $timeout, $interval) {
   $scope.total = 0;
   $scope.Replaying = false;
+  $scope.WrongAlert = false;
+  $scope.StrictMode = false;
+  $scope.userWon = true;
+  var index = 0;
 
+
+  /* JQuery only functions */
+  $("[name='strict']").bootstrapSwitch();
+  $('input[name="strict"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    $scope.StrictMode = state;
+  });
+
+  $('#btnTweet').click(function (e) {
+		 var textToTweet = "I have completed all stages of Simon! Test your memory at goo.gl/-----"
+
+		 var twtLink = 'http://twitter.com/home?status=' + encodeURIComponent(textToTweet);
+		 window.open(twtLink,'_blank');
+	 });
+
+  /* Angular functions */
   $scope.optionClick = function(event) {
     var color = event.target.classList[1];
 
-    if(canPlay === true) { //need to add iterations for multiple buttons
-      if(Moves[currentMove] === color) { //correct choice
-        clickButton(color);
-        currentMove++;
+    if(canPlay === true) {
+      if(Moves[currentMove] === color) {
+        if(currentMove === Moves.length -1) { //correct and last choice
+          canPlay = false;
+          clickButton(color);
+          currentMove = 0;
+          correctCombo();
+        }
+        else { //correct, but not last choice
+          clickButton(color);
+          currentMove++;
+        }
       }
       else { // wrong choice
-        clickButton('wrong');
-        $scope.ReplayAll();
+        if($scope.StrictMode === true) { //wrong choice resets the game
+          $scope.WrongAlert = true;
+          clickButton('wrong');
+          $scope.Clear();
+          var aux = 0;
+          var promise = $interval(function() {
+            canPlay = false;
+            if(aux++ > 0) {
+              $scope.WrongAlert = false;
+              $interval.cancel(promise);
+              $scope.Start();
+            }
+          }, 1000);
+        }
+        else { //wrong choice, repeats moves for the user to try again
+          clickButton('wrong');
+          $scope.WrongAlert = true;
+          $scope.ReplayAll();
+          currentMove = 0;
+        }
       }
     }
   }
@@ -26,10 +71,7 @@ app.controller('game', function($scope, $timeout, $interval) {
   $scope.Start = function() {
     if(notStarted === true) {
       notStarted = false;
-      Moves.push(nextButton());
-      $scope.total = Moves.length;
-      canPlay = true;
-      $scope.ReplayAll();
+      generateNext();
     }
   }
 
@@ -43,6 +85,7 @@ app.controller('game', function($scope, $timeout, $interval) {
           $interval.cancel(promise);
           canPlay = true;
           $scope.Replaying = false;
+          $scope.WrongAlert = false;
         }
         else {
           clickButton(Moves[index++]);
@@ -56,7 +99,14 @@ app.controller('game', function($scope, $timeout, $interval) {
     currentMove = 0;
     Moves = [];
     $scope.total = 0;
+    canPlay = false;
     notStarted = true;
+  }
+
+  $scope.end = function() {
+    $('.wrapper').removeClass("ng-hide");
+    $('#top').addClass("ng-hide");
+    $('#top').fireworks('destroy');
   }
 
   function clickButton(color) {
@@ -118,4 +168,35 @@ app.controller('game', function($scope, $timeout, $interval) {
     }
   }
 
+  function generateNext() {
+    Moves.push(nextButton());
+    if(Moves.length > 20) {
+      //user won the game!
+      //Show congratulations message and reset game.
+      $scope.Clear();
+      $('#top').removeClass("ng-hide");
+      $('#top').fireworks();
+      jQuery("#inner-top").before(jQuery("canvas"));
+      $('.wrapper').addClass("ng-hide");
+    }
+    else {
+      $scope.total = Moves.length;
+      canPlay = true;
+      $scope.ReplayAll();
+    }
+  }
+
+  function correctCombo() {
+    var aux = 0;
+    var promise = $interval(function() {
+      canPlay = false;
+      $scope.CorrectAlert = true;
+      if(aux++ > 0) {
+        $scope.CorrectAlert = false;
+        $interval.cancel(promise);
+        generateNext();
+        canPlay = true;
+      }
+    }, 1000);
+  }
 });

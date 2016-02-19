@@ -8,14 +8,21 @@
 
     <link rel='stylesheet prefetch' type='text/css' href='css/bootstrap.min.css'>
     <link rel='stylesheet' type='text/css' href='css/font-awesome.min.css'>
+    <link rel="stylesheet" type='text/css' href="css/bootstrap-switch.min.css">
     <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Kreon|Port+Lligat+Slab|Roboto|Alfa Slab One'>
     <link rel="stylesheet" href="css/Simon.css">
   </head>
   <body ng-app="simon" ng-controller="game">
-    <div class="container well" align="center" style="background-color: rgba(255,255,255,0.9);">
-      <p>
-        Total buttons pressed: {{total}}
-      </p>
+    <div id="top" class="top container-fluid ng-hide">
+      <div id='inner-top' class="" style="position: relative;">
+        <h3>Congratulations!</h3>
+        <h3>You have won!</h3>
+        <div class="btn btn-primary" ng-click="end()">
+          Click to continue
+        </div>
+
+        <button id="btnTweet" class="btn btn-info">Tweet it! <i class="fa fa-twitter"></i></button>
+      </div>
     </div>
 
     <div class="wrapper">
@@ -42,24 +49,36 @@
               <p class="col-xs-4 counter">{{total}}</p>
               <p class="col-xs-4 btn btn-danger btn-xs" ng-click="Clear()">Clear</p>
               <p class="col-xs-12 btn btn-default btn-xs" ng-click="ReplayAll()">Replay</p>
+              <p class="col-xs-12 btn-xs strict">
+                Strict
+                <input type="checkbox" name="strict" data-size="mini">
+              </p>
+
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container" style="margin-top: 40px;">
+    <div class="container alerts">
+      <div class="container alert alert-danger fade in" align="center" ng-show="WrongAlert" >
+        <h4><strong>Wrong!</strong> You choose the wrong color!</h4>
+      </div>
+      <div class="container alert alert-success fade in" align="center" ng-show="CorrectAlert" >
+        <h4><strong>Correct!</strong> You choose the correct color combo!</h4>
+      </div>
       <div class="container alert alert-info fade in" align="center" ng-show="Replaying" >
         <h4><strong>Standby.</strong> Currently replaying!</h4>
       </div>
     </div>
 
 
-
     <script src="js/angular.min.js"></script>
     <script src='js/jquery.js' type="text/javascript"></script>
     <script src='js/bootstrap.min.js'></script>
     <script src="js/angular-animate.min.js"></script>
+    <script src='js/bootstrap-switch.min.js'></script>
+    <script src='js/jquery.fireworks.js'></script>
     <script src="js/Simon.js"></script>
   </body>
 </html>

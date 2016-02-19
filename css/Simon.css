@@ -43,13 +43,18 @@ p {
   text-align: center;
   margin: auto;
   background-color: #333;
-  top: 5vh;
+  top: 15vh;
   box-shadow: 0 0 20px #333;
 }
 
 .wrapper-top {
   position: relative;
   top: 0.7em;
+}
+
+.alerts {
+  position: relative;
+  top: 15vh;
 }
 
 .console {
@@ -66,8 +71,12 @@ p {
   border-color: #333;
 }
 
-.console-inner {
-  line-height: 2;
+.top {
+  position: absolute;
+  min-height: 100vh;
+  min-width: 100vw;
+  text-align: center;
+  padding-top: 100px;
 }
 
 .counter {
@@ -82,6 +91,20 @@ p {
 
 .btn-xs {
   border-radius: 0;
+}
+
+.strict {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
 }
 
 .green {
