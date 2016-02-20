@@ -59,9 +59,17 @@ app.controller('game', function($scope, $timeout, $interval) {
           }, 1000);
         }
         else { //wrong choice, repeats moves for the user to try again
-          clickButton('wrong');
           $scope.WrongAlert = true;
-          $scope.ReplayAll();
+          clickButton('wrong');
+          var aux = 0;
+          var promise = $interval(function () {
+            if(aux++ > 0) {
+              $scope.WrongAlert = false;
+              $interval.cancel(promise);
+              $scope.ReplayAll();
+            }
+          }, 1000);
+
           currentMove = 0;
         }
       }
