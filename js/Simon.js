@@ -9,7 +9,7 @@ app.controller('game', function($scope, $timeout, $interval) {
   $scope.Replaying = false;
   $scope.WrongAlert = false;
   $scope.StrictMode = false;
-  $scope.userWon = true;
+
   var index = 0;
 
 
@@ -20,7 +20,7 @@ app.controller('game', function($scope, $timeout, $interval) {
   });
 
   $('#btnTweet').click(function (e) {
-		 var textToTweet = "I have completed all stages of Simon! Test your memory at goo.gl/-----"
+		 var textToTweet = "I have completed all stages of Simon! Test your memory at goo.gl/LBwDQb"
 
 		 var twtLink = 'http://twitter.com/home?status=' + encodeURIComponent(textToTweet);
 		 window.open(twtLink,'_blank');
