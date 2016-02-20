@@ -86,6 +86,7 @@ app.controller('game', function($scope, $timeout, $interval) {
   $scope.ReplayAll = function() {
     if(canPlay === true) {
       var index = 0;
+	  var currentMove = 0;
       canPlay = false;
       $scope.Replaying = true;
       var promise = $interval(function() {
